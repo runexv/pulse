@@ -1,0 +1,18 @@
+# Binaries and executables
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build directory
+build/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
