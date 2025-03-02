@@ -22,11 +22,11 @@ jobs:
         os: [windows-latest, ubuntu-latest, macos-latest]
         platform: [Windows, Linux, macOS]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@latest
       - name: Build
         run: v src/main.v -o pulse_${{ matrix.platform }}.exe
       - name: Upload release asset
-        uses: actions/upload-release-asset@v4
+        uses: actions/upload-release-asset@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_NAME: 'Latest Release'
@@ -43,12 +43,12 @@ jobs:
     steps:
       - name: Create release
         id: create-release
-        uses: actions/create-release@v1
+        uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_NAME: 'Latest Release'
       - name: Upload release asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -57,7 +57,7 @@ jobs:
           asset_name: pulse_Windows.exe
           asset_type: application/octet-stream
       - name: Upload release asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -66,7 +66,7 @@ jobs:
           asset_name: pulse_Linux.exe
           asset_type: application/octet-stream
       - name: Upload release asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
