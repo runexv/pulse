@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Release
 
 # Controls when the workflow will run
 on:
@@ -23,16 +23,14 @@ jobs:
         platform: [Windows, Linux, macOS]
     steps:
       - uses: actions/checkout@v3
-      - name: Download V compiler
+      - name: Download and install V compiler
         run: |
           if [ "${{ matrix.os }}" == "windows-latest" ]; then
             curl -fsS -o v_windows.zip https://github.com/vlang/v/releases/download/weekly.2025.09/v_windows.zip
             unzip v_windows.zip -d v
-            export PATH=$PATH:$(pwd)/v
           elif [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
             curl -fsS -o v_linux.zip https://github.com/vlang/v/releases/download/weekly.2025.09/v_linux.zip
             unzip v_linux.zip -d v
-            export PATH=$PATH:$(pwd)/v
           elif [ "${{ matrix.os }}" == "macos-latest" ]; then
             if [ "$(uname -m)" == "arm64" ]; then
               curl -fsS -o v_macos_arm64.zip https://github.com/vlang/v/releases/download/weekly.2025.09/v_macos_arm64.zip
@@ -41,9 +39,9 @@ jobs:
               curl -fsS -o v_macos_x86_64.zip https://github.com/vlang/v/releases/download/weekly.2025.09/v_macos_x86_64.zip
               unzip v_macos_x86_64.zip -d v
             fi
-            export PATH=$PATH:$(pwd)/v
-      - name: Build
-        run: v src/main.v -o pulse_${{ matrix.platform }}.exe
+          fi
+          export PATH=$PATH:$(pwd)/v
+          v src/main.v -o pulse_${{ matrix.platform }}.exe
       - name: Create release
         id: create-release
         uses: actions/create-release@v1
