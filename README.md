@@ -14,8 +14,36 @@ a simple command-line tool for checking website accessibility and monitoring upt
 - 🌍 works on windows, linux, macos
 - 🚀 auto curl install (linux and macos)
 
-## install
+## installation
 
-### needs
+### tutorial
 
-- curl (comes with windows 10+, linux, and macos)
+1. download the latest release from the releases page
+2. put the file into `%USERPROFILE%\AppData\Local\Microsoft\WindowsApps`
+3. done!
+
+### requirements
+
+- curl (comes with Windows 10+, Linux, and macOS)
+
+### usage
+
+```
+pulse <link> [options]
+```
+
+### options
+
+- `-v, --version` - show pulse's version number and exit
+- `-l, --live` - monitor website for changes in availability
+- `--t <seconds>` - set refresh interval for live monitoring (default: 15s)
+
+### examples
+
+```
+# check website status
+pulse example.com
+
+# monitor website with refresh rate of 30s
+pulse example.com -l --t 30
+```

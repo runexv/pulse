@@ -9,7 +9,7 @@ and this project adheres to [semantic versioning](https://semver.org/spec/v2.0.0
 
 ### added
 - initial release
-- basic website checking
+- check website status
 - live monitoring with custom refresh times
 - auto url formatting with https and www handling
 - support for http status codes with descriptions
