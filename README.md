@@ -1,7 +1,7 @@
 # pulse 😮‍💨
 
 [![license: mit](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/pulse/pulse/releases)
+[![version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/runexv/pulse/releases)
 
 a simple command-line tool for checking website accessibility and monitoring uptime. made with v.
 
