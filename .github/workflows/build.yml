@@ -1,0 +1,70 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Release
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        platform: [Windows, Linux, macOS]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: v src/main.v -o pulse_${{ matrix.platform }}.exe
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: pulse_${{ matrix.platform }}
+          path: pulse_${{ matrix.platform }}.exe
+
+  upload-release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_NAME: 'Latest Release'
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: pulse_Windows.exe
+          asset_name: pulse_Windows.exe
+          asset_type: application/octet-stream
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: pulse_Linux.exe
+          asset_name: pulse_Linux.exe
+          asset_type: application/octet-stream
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: pulse_macOS.exe
+          asset_name: pulse_macOS.exe
+          asset_type: application/octet-stream
