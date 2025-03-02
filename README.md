@@ -16,11 +16,23 @@ a simple command-line tool for checking website accessibility and monitoring upt
 
 ## installation
 
-### tutorial
+### windows
 
-1. download the latest release from the releases page
-2. put the file into `%USERPROFILE%\AppData\Local\Microsoft\WindowsApps`
-3. done!
+1. download pulse.exe from releases page
+2. move pulse.exe to %USERPROFILE%\pulse
+3. type `setx PATH "%PATH%;%USERPROFILE%\pulse"` in cmd
+4. done! try `pulse` to test
+
+### linux/macos
+
+1. download git from https://git-scm.com/downloads
+2. open terminal and type `git clone https://github.com/runexv/pulse && cd pulse`
+3. install v from https://vlang.io/
+4. open terminal in downloads dir and type `curl -fss -o v_linux.zip https://github.com/vlang/v/releases/download/weekly.2025.09/v_linux.zip`
+5. type `sudo unzip v_linux.zip -d /v`
+6. type `export PATH=$PATH:/v`
+7. go back to directory with pulse and type `v src/main.v -o pulse.exe`
+8. type `pulse` to test
 
 ### requirements
 
